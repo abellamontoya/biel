@@ -2,6 +2,7 @@ package com.mygdx.bird;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
@@ -35,6 +36,8 @@ public class GameScreen implements Screen {
         stage.addActor(player);
         obstacles = new Array<Pipe>();
         spawnObstacle();
+        game.manager.get("Alright.wav", Sound.class).play();
+
 
     }
     @Override
@@ -75,6 +78,15 @@ public class GameScreen implements Screen {
             game.setScreen(new GameOverScreen(game));
             dispose();
         }
+        if (Gdx.input.justTouched()) {
+            player.impulso();
+            game.manager.get("flap.wav", Sound.class).play();
+        }
+        if(dead)
+        {
+            game.manager.get("death.wav", Sound.class).play();
+            dispose();
+        }
 
         //RENDER ========================================
         ScreenUtils.clear(0.3f,0.8f,0.8f,1);
@@ -97,6 +109,8 @@ public class GameScreen implements Screen {
             if(game.lastScore > game.topScore)
                 game.topScore = game.lastScore;
             game.setScreen(new GameOverScreen(game));
+            game.manager.get("death.wav", Sound.class).stop();
+
             dispose();
         }
 

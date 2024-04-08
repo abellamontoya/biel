@@ -10,6 +10,7 @@ public class GameOverScreen implements Screen {
 
     final Bird game;
     OrthographicCamera camera;
+
     public GameOverScreen(final Bird gam) {
         game = gam;
         camera = new OrthographicCamera();
@@ -30,6 +31,7 @@ public class GameOverScreen implements Screen {
             dispose();
         }
     }
+
     @Override
     public void resize(int width, int height) {
     }
