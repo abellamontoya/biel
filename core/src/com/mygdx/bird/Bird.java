@@ -17,6 +17,8 @@ public class Bird extends Game {
 	Texture img;
 	BitmapFont smallFont, bigFont;
 	AssetManager manager;
+	int topScore;
+	int lastScore;
 
 	
 	@Override
@@ -39,6 +41,8 @@ public class Bird extends Game {
 		manager.load("pipe_down.png", Texture.class);
 		manager.load("background.png", Texture.class);
 		manager.finishLoading();
+		topScore = 0;
+		lastScore = 0;
 
 		this.setScreen(new MainMenuScreen(this));
 	}
